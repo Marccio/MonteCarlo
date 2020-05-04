@@ -140,13 +140,26 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     
     //Item A;
     //Sortear pares de coordenadas aleatoriamente utilizando classe Java Random;
-    public Int[] randomCoord(){
+
+    public class Ponto{
+        int x;
+        int y;
+
+        public Ponto(){}
+
+        public Ponto(int x, int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public Ponto randomCoord(){
         Random rand = new Random();
         int upperbound = 500; //gera números de 0-499.
-        int randX = rand.nextInt(upperbound);
-        int randY = rand.nextInt(upperbound);
+        int randX = rand.nextInt(upperbound)+1;
+        int randY = rand.nextInt(upperbound)+1;
 
-        Int[] coord = new Int[] {randX, randY};
+        Ponto coord = new Ponto(randX, randY);
 
         return coord;
     }
@@ -154,6 +167,22 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     //Item B;
     /*Criar uma coleção de pares de coordenadas de um tamanho 
     estipulado pelo usuário;*/
+    public Ponto[] collect(int n){
+        Ponto[] col = new Ponto[];
+        for(int i = 0; i<=n; i++){
+            col.add(randomCoord());
+        }
+        return col;
+    }
+
+    //Item C
+    /*Colorir os pixels sorteados aleatoriamente,
+     contidos na coleção do item b na imagem e exibi-la;*/
+    public Image randPixel(BufferedImage image, Ponto[] collection){
+        for (Ponto p: collection) {
+            paintPixel(image,p.x, p.y);
+        }
+    }
 
 
     public static void main(String[] args) {
