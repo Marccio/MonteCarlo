@@ -19,6 +19,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
+import java.util.Random;
  
 /**
  * This is a test program that draws an image provided by the user and scales
@@ -135,7 +137,25 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
         // Return the buffered image
         return bimage;
     }
-     
+    
+    //Item A;
+    //Sortear pares de coordenadas aleatoriamente utilizando classe Java Random;
+    public Int[] randomCoord(){
+        Random rand = new Random();
+        int upperbound = 500; //gera números de 0-499.
+        int randX = rand.nextInt(upperbound);
+        int randY = rand.nextInt(upperbound);
+
+        Int[] coord = new Int[] {randX, randY};
+
+        return coord;
+    }
+
+    //Item B;
+    /*Criar uma coleção de pares de coordenadas de um tamanho 
+    estipulado pelo usuário;*/
+
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
              
