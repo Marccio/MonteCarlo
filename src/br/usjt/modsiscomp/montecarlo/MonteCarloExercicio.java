@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -20,8 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import java.util.Random;
 import java.util.ArrayList;
+import java.util.Random;
  
 /**
  * This is a test program that draws an image provided by the user and scales
@@ -40,7 +41,7 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     private JLabel labelImage = new ScaledImageLabel();
      
     public MonteCarloExercicio() {
-        super("Monte Carlo - Exercício");
+        super("Monte Carlo - ExercÃ­cio");
          
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -142,7 +143,7 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     //Item A;
     //Sortear pares de coordenadas aleatoriamente utilizando classe Java Random;
 
-    public class Ponto{
+    public static class Ponto{
         int x;
         int y;
 
@@ -154,9 +155,9 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
         }
     }
 
-    public Ponto randomCoord(){
+    public static Ponto randomCoord(){
         Random rand = new Random();
-        int upperbound = 500; //gera números de 0-499.
+        int upperbound = 500; //gera nÃºmeros de 0-499.
         int randX = rand.nextInt(upperbound)+1;
         int randY = rand.nextInt(upperbound)+1;
 
@@ -166,11 +167,11 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     }
 
     //Item B;
-    /*Criar uma coleção de pares de coordenadas de um tamanho 
-    estipulado pelo usuário;*/
-    public ArrayList<Ponto> collect(int n){
+    /*Criar uma coleÃ§Ã£o de pares de coordenadas de um tamanho 
+    estipulado pelo usuÃ¡rio;*/
+    public static ArrayList<Ponto> collect(int n){
         ArrayList<Ponto> col = new ArrayList<>();
-        for(int i = 0; i<=n; i++){
+        for(int i = 0; i<n; i++){
             col.add(randomCoord());
         }
         return col;
@@ -178,7 +179,7 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
 
     //Item C
     /*Colorir os pixels sorteados aleatoriamente,
-     contidos na coleção do item b na imagem e exibi-la;*/
+     contidos na coleÃ§Ã£o do item b na imagem e exibi-la;*/
     public Image randPixel(BufferedImage image, ArrayList<Ponto> collection, int n) {
 
         if(n > collection.size()) {
@@ -189,9 +190,17 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+    	ArrayList<Ponto> collection = collect(10);
+    	
+    	MonteCarloExercicio mont = new MonteCarloExercicio();
+    	
+        
+    	mont.randPixel(imagem, collection, 0);
+    	
+    	
+    	
         SwingUtilities.invokeLater(new Runnable() {
-             
             @Override
             public void run() {
                 new MonteCarloExercicio().setVisible(true);
