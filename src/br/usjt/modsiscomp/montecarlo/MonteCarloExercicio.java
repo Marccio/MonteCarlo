@@ -100,8 +100,8 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
             BufferedImage imageB = ImageIO.read(file);
             // Getting pixel color by position x=100 and y=40 
 
-            System.out.println("Ponto: [90,90] --> "+findColor(imageB,90,90));
-            System.out.println("Ponto: [200,200] --> "+findColor(imageB,200,200));
+            //System.out.println("Ponto: [90,90] --> "+findColor(imageB,90,90));
+            //System.out.println("Ponto: [200,200] --> "+findColor(imageB,200,200));
             
             labelImage.setIcon(new ImageIcon(imageB));
             
@@ -110,7 +110,7 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
             int siz = Integer.parseInt(fieldCollectionSize.getText());
             ArrayList<Ponto> collection = collect(siz);
             randomPixel(imageB, collection);
-            System.out.println("Area Estimada: " + guessArea(imageB, collection, 0));
+            System.out.println("Area Estimada --> " + guessArea(imageB, collection, 0) + " metros quadrados.");
              
         } catch (Exception ex) {
             System.err.println(ex);
@@ -215,14 +215,12 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
         }
     }
 
-    public double guessArea(BufferedImage image, ArrayList<Ponto> collection, int acc){
+    public double guessArea(BufferedImage image, ArrayList<Ponto> collection, double acc){
         for(int i = 0; i < collection.size(); i++){
             acc += isOutside(image, collection.get(i));
         }
-        System.out.println(acc);
-        System.out.println(collection.size());
 
-        double guess = (500 * 500) * (acc/collection.size());
+        double guess = (double) (250000 * (acc/collection.size()));
 
         return guess;
     }
