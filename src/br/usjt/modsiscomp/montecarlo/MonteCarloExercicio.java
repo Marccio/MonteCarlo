@@ -109,7 +109,8 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
 
             int siz = Integer.parseInt(fieldCollectionSize.getText());
             ArrayList<Ponto> collection = collect(siz);
-            randPixel(imageB, collection);
+            randomPixel(imageB, collection);
+            System.out.println("Area Estimada: " + guessArea(imageB, collection, 0));
              
         } catch (Exception ex) {
             System.err.println(ex);
@@ -171,8 +172,8 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     public static Ponto randomCoord(){
         Random rand = new Random();
         int upperbound = 500; //gera numeros de 0-499.
-        int randX = rand.nextInt(upperbound)+1;
-        int randY = rand.nextInt(upperbound)+1;
+        int randX = rand.nextInt(upperbound);
+        int randY = rand.nextInt(upperbound);
 
         Ponto coord = new Ponto(randX, randY);
 
@@ -184,7 +185,7 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     estipulado pelo usuario;*/
     public static ArrayList<Ponto> collect(int n){
         ArrayList<Ponto> col = new ArrayList<>();
-        for(int i = 0; i<n; i++){
+        for(int i = 0; i < n; i++){
             col.add(randomCoord());
         }
         return col;
@@ -193,15 +194,38 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     //Item C
     /*Colorir os pixels sorteados aleatoriamente,
      contidos na colecao do item b na imagem e exibi-la;*/
-    public Image randPixel(BufferedImage image, ArrayList<Ponto> collection) {
+    public Image randomPixel(BufferedImage image, ArrayList<Ponto> collection) {
 
         for (int i = 0; i < collection.size(); i++){
             paintPixel(image, collection.get(i).x, collection.get(i).y);
         }
         
-        return paintPixel(image, collection.get(collection.size()).x, collection.get(collection.size()).y);
+        return paintPixel(image, collection.get(collection.size() - 1).x, collection.get(collection.size() - 1).y);
     }
 
+    //Item D
+    /*Entre os pixels que foram sorteados, detectar 
+    qual esta dentro do limite da figura e estimar a area da figura;*/
+
+    public int isOutside(BufferedImage image, Ponto p){
+        if(findColor(image, p.x, p.x).equals("R:255 G:255 B:255")){
+            return 1;
+        } else{
+            return 0;
+        }
+    }
+
+    public double guessArea(BufferedImage image, ArrayList<Ponto> collection, int acc){
+        for(int i = 0; i < collection.size(); i++){
+            acc += isOutside(image, collection.get(i));
+        }
+        System.out.println(acc);
+        System.out.println(collection.size());
+
+        double guess = (500 * 500) * (acc/collection.size());
+
+        return guess;
+    }
 
     public static void main(String[] args) throws IOException {
 
