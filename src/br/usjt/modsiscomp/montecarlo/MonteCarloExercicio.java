@@ -178,9 +178,12 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     //Item C
     /*Colorir os pixels sorteados aleatoriamente,
      contidos na coleção do item b na imagem e exibi-la;*/
-    public Image randPixel(BufferedImage image, Ponto[] collection){
-        for (Ponto p: collection) {
-            paintPixel(image,p.x, p.y);
+    public Image randPixel(BufferedImage image, ArrayList<Ponto> collection, int n) {
+
+        if(!collection.next()) {
+            return image;
+        } else {
+            return randPixel(paintPixel(image, collection[n].x, collection[n].y),collection, n++);
         }
     }
 
