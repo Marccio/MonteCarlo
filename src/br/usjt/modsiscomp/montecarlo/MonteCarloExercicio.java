@@ -181,7 +181,6 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     public Image randPixel(BufferedImage image, Ponto[] collection){
         for (Ponto p: collection) {
             paintPixel(image,p.x, p.y);
-            image+= image;
         }
     }
 
