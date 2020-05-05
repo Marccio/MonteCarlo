@@ -167,8 +167,8 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     //Item B;
     /*Criar uma coleção de pares de coordenadas de um tamanho 
     estipulado pelo usuário;*/
-    public Ponto[] collect(int n){
-        Ponto[] col = new Ponto[];
+    public ArrayList<Ponto> collect(int n){
+        ArrayList<Ponto> col = new ArrayList<>();
         for(int i = 0; i<=n; i++){
             col.add(randomCoord());
         }
