@@ -105,13 +105,11 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
             
             labelImage.setIcon(new ImageIcon(imageB));
             
-            paintPixel(imageB,90,90);
-            
             labelImage.setIcon(new ImageIcon(imageB));
 
             int siz = Integer.parseInt(fieldCollectionSize.getText());
             ArrayList<Ponto> collection = collect(siz);
-            randPixel(imageB, collection, 0);
+            randPixel(imageB, collection);
              
         } catch (Exception ex) {
             System.err.println(ex);
@@ -195,13 +193,13 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
     //Item C
     /*Colorir os pixels sorteados aleatoriamente,
      contidos na colecao do item b na imagem e exibi-la;*/
-    public Image randPixel(BufferedImage image, ArrayList<Ponto> collection, int n) {
+    public Image randPixel(BufferedImage image, ArrayList<Ponto> collection) {
 
-        if(n > collection.size()) {
-            return image;
-        } else {
-            return randPixel(toBufferedImage(paintPixel(image, collection.get(n).x, collection.get(n).y)),collection, n++);
+        for (int i = 0; i < collection.size(); i++){
+            paintPixel(image, collection.get(i).x, collection.get(i).y);
         }
+        
+        return paintPixel(image, collection.get(collection.size()).x, collection.get(collection.size()).y);
     }
 
 
