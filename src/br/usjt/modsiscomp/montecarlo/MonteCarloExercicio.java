@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import java.util.Random;
+import java.util.ArrayList;
  
 /**
  * This is a test program that draws an image provided by the user and scales
@@ -180,10 +181,10 @@ public class MonteCarloExercicio extends JFrame implements ActionListener {
      contidos na coleção do item b na imagem e exibi-la;*/
     public Image randPixel(BufferedImage image, ArrayList<Ponto> collection, int n) {
 
-        if(!collection.next()) {
+        if(n > collection.size()) {
             return image;
         } else {
-            return randPixel(paintPixel(image, collection[n].x, collection[n].y),collection, n++);
+            return randPixel(toBufferedImage(paintPixel(image, collection.get(n).x, collection.get(n).y)),collection, n++);
         }
     }
 
